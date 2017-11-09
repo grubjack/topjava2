@@ -1,0 +1,21 @@
+td.exceeded {
+    color: red;
+}
+
+td.notExceeded {
+    color: green;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 3px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+th {
+    background: #b0e0e6;
+}
