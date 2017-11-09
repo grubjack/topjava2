@@ -42,7 +42,7 @@ public class MealsUtil {
 
         return meals.stream()
                 .filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
-                .map(meal -> createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
+                .map(meal -> new MealWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(toList());
     }
 
@@ -54,7 +54,7 @@ public class MealsUtil {
         final List<MealWithExceed> mealsWithExceeded = new ArrayList<>();
         meals.forEach(meal -> {
             if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
-                mealsWithExceeded.add(createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay));
+                mealsWithExceeded.add(new MealWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay));
             }
         });
         return mealsWithExceeded;
@@ -68,7 +68,7 @@ public class MealsUtil {
             boolean exceed = dayMeals.stream().mapToInt(Meal::getCalories).sum() > caloriesPerDay;
             return dayMeals.stream().filter(meal ->
                     TimeUtil.isBetween(meal.getTime(), startTime, endTime))
-                    .map(meal -> createWithExceed(meal, exceed));
+                    .map(meal -> new MealWithExceed(meal, exceed));
         }).collect(toList());
     }
 
@@ -93,7 +93,7 @@ public class MealsUtil {
 
             private Stream<MealWithExceed> finisher() {
                 final boolean exceed = dailySumOfCalories > caloriesPerDay;
-                return dailyMeals.stream().map(meal -> createWithExceed(meal, exceed));
+                return dailyMeals.stream().map(meal -> new MealWithExceed(meal, exceed));
             }
         }
 
@@ -105,7 +105,4 @@ public class MealsUtil {
         return values.stream().flatMap(identity()).collect(toList());
     }
 
-    public static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
-        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
-    }
 }

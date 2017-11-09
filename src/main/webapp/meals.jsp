@@ -15,6 +15,7 @@
         <th>Description</th>
         <th>Calories</th>
         <th>isExceed</th>
+        <th>Action</th>
     </tr>
     <c:forEach var="meal" items="${meals}">
         <fmt:parseDate value="${meal.dateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
@@ -22,6 +23,7 @@
         <td>${meal.description}</td>
         <td>${meal.calories}</td>
         <td class=${meal.exceed ? "exceeded" : "notExceeded" }>${meal.exceed}</td>
+        <td><a href=?action=edit&id=${meal.id}>edit</a></td>
         </tr>
     </c:forEach>
 </table>
