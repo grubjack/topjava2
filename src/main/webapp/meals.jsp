@@ -9,6 +9,7 @@
 <body>
 <h3><a href="index.html">Home</a></h3>
 <h2>Meals</h2>
+<h1><a href="mealEdit.jsp">Add meal</a></h1>
 <table>
     <tr>
         <th>Date</th>
@@ -23,7 +24,10 @@
         <td>${meal.description}</td>
         <td>${meal.calories}</td>
         <td class=${meal.exceed ? "exceeded" : "notExceeded" }>${meal.exceed}</td>
-        <td><a href=?action=edit&id=${meal.id}>edit</a></td>
+        <td>
+            <a href=?action=edit&id=${meal.id}>edit</a>
+            <a href=?action=delete&id=${meal.id}>delete</a>
+        </td>
         </tr>
     </c:forEach>
 </table>

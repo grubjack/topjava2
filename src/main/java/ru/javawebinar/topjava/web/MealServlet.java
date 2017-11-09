@@ -39,10 +39,16 @@ public class MealServlet extends HttpServlet {
                     }
                 }
             }
-        } else {
-            log.debug("getAll meals");
-            request.setAttribute("meals", MealsUtil.getFilteredWithExceeded(mealDao.getAll(), LocalTime.MIN, LocalTime.MAX, 2000));
+        } else if ("delete".equalsIgnoreCase(action)) {
+            if (id != null) {
+                int mealId = Integer.parseInt(id);
+                if (mealId > 0) {
+                    log.debug("delete meal with id " + mealId);
+                    mealDao.delete(mealId);
+                }
+            }
         }
+        request.setAttribute("meals", MealsUtil.getFilteredWithExceeded(mealDao.getAll(), LocalTime.MIN, LocalTime.MAX, 2000));
         log.debug("redirect to meals");
         request.getRequestDispatcher("meals.jsp").forward(request, response);
     }
@@ -50,13 +56,19 @@ public class MealServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
+        String id = request.getParameter("id");
         int calories = Integer.parseInt(request.getParameter("calories"));
         String description = request.getParameter("description");
         LocalDateTime dateTime = LocalDateTime.parse(request.getParameter("dateTime"));
 
-        log.debug("update meal with id " + id);
-        mealDao.update(new Meal(dateTime, description, calories), id);
+        Meal meal = new Meal(dateTime, description, calories);
+        if (id != null) {
+            log.debug("add new meal");
+            mealDao.create(meal);
+        } else {
+            log.debug("update meal with id " + id);
+            mealDao.update(meal, Integer.parseInt(id));
+        }
         log.debug("redirect to meals");
         response.sendRedirect("meals");
 
