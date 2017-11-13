@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.util;
 
+import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.User;
 
 import java.util.Arrays;
@@ -22,6 +23,6 @@ public class UsersUtil {
             new User("Stavro", "srobbie9@whitehouse.gov", "TfVP3pmZRG", ROLE_USER)
     );
 
-    public static final int DEFAULT_USER_ID = USERS.get(0).getId();
+    public static final int DEFAULT_USER_ID = AuthorizedUser.id();
 
 }
