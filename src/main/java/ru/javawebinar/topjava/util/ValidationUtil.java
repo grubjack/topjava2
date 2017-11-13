@@ -25,6 +25,19 @@ public class ValidationUtil {
         }
     }
 
+    public static void checkWrongId(int entityId, int id) {
+        if (entityId != id) {
+            throw new NotFoundException("Wrong id " + id);
+        }
+    }
+
+    public static void checkWrongEntity(AbstractBaseEntity entity, int id) {
+        if (entity != null) {
+            checkWrongId(entity.getId(), id);
+        }
+    }
+
+
     public static void checkNew(AbstractBaseEntity entity) {
         if (!entity.isNew()) {
             throw new IllegalArgumentException(entity + " must be new (id=null)");
