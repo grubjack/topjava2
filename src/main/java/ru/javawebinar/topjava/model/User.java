@@ -33,6 +33,10 @@ public class User extends AbstractNamedEntity {
         this.roles = roles;
     }
 
+    public User(String name, String email, String password, Role... roles) {
+        this(null, name, email, password, null, roles);
+    }
+
     public String getEmail() {
         return email;
     }
