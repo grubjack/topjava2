@@ -21,4 +21,7 @@ public class UsersUtil {
             new User("Mattheus", "mstoving8@ebay.co.uk", "pnNrrOu6Nqjn", ROLE_USER),
             new User("Stavro", "srobbie9@whitehouse.gov", "TfVP3pmZRG", ROLE_USER)
     );
+
+    public static final int DEFAULT_USER_ID = USERS.get(0).getId();
+
 }
