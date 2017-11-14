@@ -23,6 +23,6 @@ public class UsersUtil {
             new User("Stavro", "srobbie9@whitehouse.gov", "TfVP3pmZRG", ROLE_USER)
     );
 
-    public static final int DEFAULT_USER_ID = AuthorizedUser.id();
+    public static final int DEFAULT_USER_ID = AuthorizedUser.getId();
 
 }

@@ -10,7 +10,6 @@
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
     <tr>
-        <th>Id</th>
         <th>Name</th>
         <th>Password</th>
         <th>Email</th>
@@ -20,7 +19,6 @@
     <c:forEach items="${users}" var="user">
         <jsp:useBean id="user" scope="page" type="ru.javawebinar.topjava.model.User"/>
         <tr>
-            <td>${user.id}</td>
             <td>${user.name}</td>
             <td>${user.password}</td>
             <td>${user.email}</td>

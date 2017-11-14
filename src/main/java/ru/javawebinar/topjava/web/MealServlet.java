@@ -43,9 +43,9 @@ public class MealServlet extends HttpServlet {
 
         log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
         if (meal.isNew()) {
-            mealRestController.create(meal, AuthorizedUser.id());
+            mealRestController.create(meal, AuthorizedUser.getId());
         } else {
-            mealRestController.update(meal, Integer.valueOf(id), AuthorizedUser.id());
+            mealRestController.update(meal, Integer.valueOf(id), AuthorizedUser.getId());
         }
         response.sendRedirect("meals");
     }
@@ -58,14 +58,14 @@ public class MealServlet extends HttpServlet {
             case "delete":
                 int id = getId(request);
                 log.info("Delete {}", id);
-                mealRestController.delete(id, AuthorizedUser.id());
+                mealRestController.delete(id, AuthorizedUser.getId());
                 response.sendRedirect("meals");
                 break;
             case "create":
             case "update":
                 final Meal meal = "create".equals(action) ?
                         new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000) :
-                        mealRestController.get(getId(request), AuthorizedUser.id());
+                        mealRestController.get(getId(request), AuthorizedUser.getId());
                 request.setAttribute("meal", meal);
                 request.getRequestDispatcher("/mealForm.jsp").forward(request, response);
                 break;
@@ -73,7 +73,7 @@ public class MealServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("meals",
-                        MealsUtil.getWithExceeded(mealRestController.getAll(AuthorizedUser.id()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
+                        MealsUtil.getWithExceeded(mealRestController.getAll(AuthorizedUser.getId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }
