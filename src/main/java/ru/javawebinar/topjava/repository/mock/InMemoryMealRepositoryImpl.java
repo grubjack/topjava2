@@ -38,7 +38,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     public void delete(int id, int userId) {
         Meal meal = get(id, userId);
         if (meal != null) {
-            repository.remove(meal);
+            repository.remove(id);
         }
     }
 
