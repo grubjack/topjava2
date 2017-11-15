@@ -8,7 +8,7 @@ import static ru.javawebinar.topjava.util.UsersUtil.DEFAULT_USER_ID;
 
 public class Meal extends AbstractBaseEntity {
 
-    private int userId = DEFAULT_USER_ID;
+    private final int userId;
 
     private final LocalDateTime dateTime;
 
@@ -78,4 +78,6 @@ public class Meal extends AbstractBaseEntity {
                 ", id=" + id +
                 "} " + super.toString();
     }
+
+
 }
