@@ -22,6 +22,16 @@
     <h2>Meals</h2>
     <a href="meals?action=create">Add Meal</a>
     <hr/>
+    <form method="post" action="meals">
+        <dl>
+            From date:<input type="date" name="fromDate"> From time:<input type="time" name="fromTime">
+        </dl>
+        <dl>
+            To date:<input type="date" name="toDate"> To time:<input type="time" name="toTime">
+        </dl>
+        <button type="submit">Filter</button>
+        <button type="reset">Reset</button>
+    </form>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
